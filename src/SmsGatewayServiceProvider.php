@@ -3,6 +3,7 @@
 namespace qlixes\SmsGateway;
 
 use Illuminate\Support\ServiceProvider;
+use qlixes\SmsGateway\Vendors\EnvayaSmsGateway;
 
 class SmsGatewayServiceProvider extends ServiceProvider
 {
