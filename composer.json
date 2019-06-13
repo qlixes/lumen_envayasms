@@ -1,0 +1,21 @@
+{
+    "name": "qlixes/smsgateway",
+    "description": "A Laravel bridge to http://smsgateway.me and http://semysms.net",
+    "license": "MIT",
+    "type":"library",
+    "authors": [
+        {
+            "name": "Antony",
+            "email": "qlixess@gmail.com"
+        }
+    ],
+    "autoload": {
+
+        "psr-4": {
+            "qlixes\\SmsGateway\\": "src"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
