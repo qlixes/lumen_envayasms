@@ -27,8 +27,8 @@ class EnvayaSmsGateway extends Client
         $messages = [];
         foreach ($destinations as $destination) {
             $messages[] = [
-                'phone_number' => $destination,
-                'message'      => $text,
+                'user_phone' => $destination,
+                'user_message'      => $text,
             ];
         };
 
