@@ -25,24 +25,27 @@ class EnvayaSmsGateway extends Client
     function sms(array $destinations, string $text): ?array
     {
         $messages = [];
+        $responses = [];
+
         foreach ($destinations as $destination) {
-            $messages[] = [
+            $messages = [
                 'user_phone' => $destination,
                 'user_message'      => $text,
             ];
+
+            $this->options['form_params'] = $messages;
+
+            $response = $this->request("POST", "gateway", $this->options);
+
+            if($response->getStatusCode() != 200)
+                Log::error($response->getReasonPhrase());
+
+            $responses[] = [
+                'code' => $response->getStatusCode(),
+                'message' => $response->getReasonPhrase(),
+                'data' => json_decode($response->getBody()->getContents())
+            ];
         };
-
-        $this->options['json'] = $messages;
-
-        $response = $this->request('POST', "gateway", $this->options);
-
-        if($response->getStatusCode() != 200)
-            Log::error($response->getReasonPhrase());
-
-        return [
-            'code' => $response->getStatusCode(),
-            'message' => $response->getReasonPhrase(),
-            'data' => json_decode($response->getBody()->getContents())
-        ];
+        return $responses;
     }
 }
