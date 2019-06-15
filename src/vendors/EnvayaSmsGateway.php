@@ -16,8 +16,8 @@ class EnvayaSmsGateway extends Client
         $this->token = config('smsgateway.token');
 
         $this->options['headers'] = [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
+            //'Accept' => 'application/json',
+            //'Content-Type' => 'application/json',
             'Authorization' => $this->token
         ];
     }
