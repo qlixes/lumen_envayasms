@@ -3,7 +3,6 @@
 namespace qlixes\SmsGateway;
 
 use Illuminate\Support\ServiceProvider;
-use qlixes\SmsGateway\Vendors\EnvayaSmsGateway;
 
 class SmsGatewayServiceProvider extends ServiceProvider
 {
@@ -11,12 +10,16 @@ class SmsGatewayServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->publishes([__DIR__.'/config/smsgateway.php' => config_path('smsgateway.php')]);
+
+        $this->vendor = config('smsgateway.vendor');
     }
 
     public function register()
     {
         $this->app->singleton('smsgateway', function($app) {
-            return new EnvayaSmsGateway();
+            $alias = sprintf('\qlixes\SmsGateway\Vendors\%s',  $this->vendor);
+            return new $alias();
         });
     }
 }

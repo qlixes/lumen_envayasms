@@ -10,6 +10,8 @@
 */
 
 return [
+	'vendor' => 'your.vendor',
     'uri' => 'your.uri',
     'token' => 'your.token',
+    'device' => 'your.device',
 ];
